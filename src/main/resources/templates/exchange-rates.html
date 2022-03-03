@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NBP Gold & Price</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+  </head>
+  <body>
+    <div class="main">
+      <div class="title">
+        <h1 th:text="'Exchange rate: ' + ${currencyCode} + ' - PLN'"></h1>
+      </div>
+      <div class="table-section">
+        <div class="table-title">
+          <h3>Table presents exchange rates from the last 5 business days</h3>
+        </div>
+        <div class="table-content">
+          <table>
+            <thead class="table-header">
+              <tr>
+                <th> Num </th>
+                <th> Data </th>
+                <th> Buy </th>
+                <th> Sell </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:if="${rates.empty}">
+                <td colspan="2"> No Books Available </td>
+              </tr>
+              <tr class="row" th:each="rate : ${rates}">
+                <td><span th:text="${rate.date}"></span></td>
+                <td><span th:text="${rate.bid}"></span></td>
+                <td><span th:text="${rate.ask}"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="currency-codes">
+          <h3>Visit <a href="https://taxsummaries.pwc.com/glossary/currency-codes" target="_blank">this link</a> to check other currency codes</h3>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+  </body>
+</html>

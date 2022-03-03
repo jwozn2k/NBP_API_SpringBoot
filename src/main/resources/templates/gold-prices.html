@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <script th:inline="javascript">
+        const goldPrices = [[${goldPrices}]];
+
+        const chartGoldPrices = [];
+        goldPrices.forEach(el => {
+            chartGoldPrices.push({x: new Date(el.data), y: el.cena});
+        })
+
+        const averageGoldPrice = [[${averageGoldPrice}]];
+
+        window.onload = function () {
+            const chart = new CanvasJS.Chart("chartContainer",
+                {
+
+                    title:{
+                        text: "Gold Price for 1g"
+                    },
+                    axisX:{
+                        //Try Changing to MMMM
+                        valueFormatString: "YYYY-MM-DD"
+                    },
+
+                    axisY: {
+                        stripLines:[
+                        {
+                            value: averageGoldPrice,
+                            label:`average = ${averageGoldPrice.toFixed(2)}`,
+                            color:"#FF0000"
+                        }],
+                        valueFormatString: "0.0#"
+                    },
+
+                    data: [
+                        {
+                            type: "line",
+                            lineThickness: 2,
+                            dataPoints: chartGoldPrices
+                        }
+                    ]
+                });
+
+            chart.render();
+        }
+    </script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #chartContainer {
+            height: 80vh;
+            width: 90vw;
+        }
+    </style>
+  </head>
+  <body>
+  <div id="chartContainer">
+  </div>
+  </body>
+</html>
