@@ -24,6 +24,7 @@ GET /api/exchange-rates/{currencyCode}
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | `currencyCode` | `string` | **Required**. Currency code for exchange rate |  
+
 Some of the currency codes [here](https://taxsummaries.pwc.com/glossary/currency-codes).
 
 ### Average Gold Price
